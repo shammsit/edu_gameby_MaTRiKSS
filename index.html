@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoQuest - Learn & Protect Our Planet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #3498db;
+            --accent: #f1c40f;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --danger: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #1abc9c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9fc;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            background-color: #e6b80a;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--secondary);
+        }
+        
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-img {
+            height: 180px;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .feature-content {
+            padding: 20px;
+        }
+        
+        .feature-content h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 5px;
+        }
+        
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .badge {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .badge.locked {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+            color: #bdc3c7;
+        }
+        
+        .badge-info {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        
+        .badge:hover .badge-info {
+            opacity: 1;
+        }
+        
+        .leaderboard {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 50px;
+        }
+        
+        .school-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .school-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .school-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .rank {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-right: 20px;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .school-info {
+            flex-grow: 1;
+        }
+        
+        .school-points {
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>EcoQuest</span>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Lessons</a></li>
+                    <li><a href="#">Challenges</a></li>
+                    <li><a href="#">Leaderboard</a></li>
+                    <li><a href="#">Rewards</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button class="btn btn-outline">Login</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Learn. Act. Protect Our Planet.</h1>
+            <p>Join the mission to become an environmental champion through interactive lessons, real-world challenges, and compete with schools worldwide.</p>
+            <button class="btn btn-primary">Start Your EcoQuest</button>
+        </div>
+    </section>
+    
+    <section class="dashboard container">
+        <h2 class="section-title">Your EcoQuest Dashboard</h2>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <i class="fas fa-seedling"></i>
+                <h3>1,245</h3>
+                <p>Eco-Points Earned</p>
+            </div>
+            
+            <div class="stat-card">
+                <i class="fas fa-medal"></i>
+                <h3>12</h3>
+                <p>Badges Collected</p>
+            </div>
+            
+            <div class="stat-card">
+                <i class="fas fa-check-circle"></i>
+                <h3>18</h3>
+                <p>Challenges Completed</p>
+            </div>
+            
+            <div class="stat-card">
+                <i class="fas fa-trophy"></i>
+                <h3>#7</h3>
+                <p>School Ranking</p>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Continue Your Learning Journey</h2>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-img">
+                    <i class="fas fa-recycle"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>Waste Management</h3>
+                    <p>Learn how to properly segregate waste and reduce your ecological footprint.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%"></div>
+                    </div>
+                    <p>75% completed</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-img">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>Water Conservation</h3>
+                    <p>Discover ways to conserve water and protect our precious water resources.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 30%"></div>
+                    </div>
+                    <p>30% completed</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-img">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>Deforestation</h3>
+                    <p>Understand the impact of deforestation and how to combat it effectively.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 50%"></div>
+                    </div>
+                    <p>50% completed</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Your Badges</h2>
+        
+        <div class="badges">
+            <div class="badge">
+                <i class="fas fa-recycle"></i>
+                <div class="badge-info">Recycling Expert</div>
+            </div>
+            <div class="badge">
+                <i class="fas fa-bicycle"></i>
+                <div class="badge-info">Eco Commuter</div>
+            </div>
+            <div class="badge">
+                <i class="fas fa-shopping-bag"></i>
+                <div class="badge-info">Plastic Free</div>
+            </div>
+            <div class="badge">
+                <i class="fas fa-lightbulb"></i>
+                <div class="badge-info">Energy Saver</div>
+            </div>
+            <div class="badge locked">
+                <i class="fas fa-tree"></i>
+                <div class="badge-info">Tree Planter (Locked)</div>
+            </div>
+            <div class="badge locked">
+                <i class="fas fa-wind"></i>
+                <div class="badge-info">Clean Energy (Locked)</div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">School Leaderboard</h2>
+        
+        <div class="leaderboard">
+            <div class="school-list">
+                <div class="school-item">
+                    <div class="rank">1</div>
+                    <div class="school-info">Greenwood High</div>
+                    <div class="school-points">12,450 pts</div>
+                </div>
+                
+                <div class="school-item">
+                    <div class="rank">2</div>
+                    <div class="school-info">Eco Valley School</div>
+                    <div class="school-points">11,780 pts</div>
+                </div>
+                
+                <div class="school-item">
+                    <div class="rank">3</div>
+                    <div class="school-info">Nature Academy</div>
+                    <div class="school-points">10,920 pts</div>
+                </div>
+                
+                <div class="school-item">
+                    <div class="rank">4</div>
+                    <div class="school-info">Solaris Institute</div>
+                    <div class="school-points">9,850 pts</div>
+                </div>
+                
+                <div class="school-item">
+                    <div class="rank">5</div>
+                    <div class="school-info">Oceanview College</div>
+                    <div class="school-points">8,790 pts</div>
+                </div>
+                
+                <div class="school-item">
+                    <div class="rank">7</div>
+                    <div class="school-info">Your School</div>
+                    <div class="school-points">7,650 pts</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>EcoQuest</span>
+            </div>
+            
+            <p>Empowering the next generation of environmental stewards</p>
+            
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">For Educators</a>
+            </div>
+            
+            <p>&copy; 2023 EcoQuest. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple interactivity for the UI
+        document.addEventListener('DOMContentLoaded', function() {
+            // Feature card click handler
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    alert('Starting lesson: ' + this.querySelector('h3').textContent);
+                });
+            });
+            
+            // Badge click handler
+            const badges = document.querySelectorAll('.badge');
+            badges.forEach(badge => {
+                badge.addEventListener('click', function() {
+                    if (this.classList.contains('locked')) {
+                        alert('Complete more challenges to unlock this badge!');
+                    } else {
+                        alert('Badge earned: ' + this.querySelector('.badge-info').textContent);
+                    }
+                });
+            });
+            
+            // Login/signup buttons
+            const loginBtn = document.querySelector('.btn-outline');
+            const signupBtn = document.querySelector('.btn-primary');
+            
+            loginBtn.addEventListener('click', function() {
+                alert('Login feature would be implemented here');
+            });
+            
+            signupBtn.addEventListener('click', function() {
+                alert('Sign up feature would be implemented here');
+            });
+        });
+    </script>
+</body>
+</html>
